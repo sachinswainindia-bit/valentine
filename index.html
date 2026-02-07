@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Important Valentine Question 💘</title>
+  <style>
+    body {
+      background: #ffe6f2;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      padding-top: 120px;
+    }
+    #question {
+      font-size: 36px;
+      margin: 20px;
+    }
+    .btn {
+      font-size: 24px;
+      padding: 15px 30px;
+      margin: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+    }
+    #yes { background: #ff6699; color: white; }
+    #no { background: #999; color: white; }
+  </style>
+</head>
+
+<body>
+  <h1>🚨 IMPORTANT SYSTEM ALERT 🚨</h1>
+  <p id="question">IF (YOU === AWESOME) {<br>
+  &nbsp;&nbsp;ANSWER = ❤️"YES"<br>
+  } ELSE {<br>
+  &nbsp;&nbsp;ANSWER = "TRY AGAIN"<br>
+  }</p>
+
+  <button id="yes" class="btn" onclick="replyYes()">YES 😌</button>
+  <button id="no" class="btn" onclick="moveNo()">NO 🙃</button>
+
+  <script>
+    let noBtn = document.getElementById("no");
+
+    function replyYes() {
+      alert("BEST DECISION EVER! 💖");
+      document.body.style.background = "#ffb3d9";
+      document.getElementById("question").innerText = "💘 YOU MADE ME SMILE! 💘";
+    }
+
+    function moveNo() {
+      noBtn.style.position = "relative";
+      noBtn.style.left = Math.random()*200 - 100 + "px";
+      noBtn.style.top = Math.random()*100 - 50 + "px";
+      alert("Oops 😏 That button is shy. Try YES!");
+    }
+  </script>
+</body>
+</html>
