@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Cache control: forces latest version -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>pls don’t panic 💘</title>
 
   <style>
@@ -56,6 +62,7 @@
       100% { transform: scale(1); }
     }
 
+    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -99,7 +106,7 @@
       yesBtn.addEventListener("click", () => {
         document.body.style.background = "#ffb3d9";
         document.querySelector("h1").innerText = "YAYYY 💘";
-        document.querySelector("p").innerText = "a period may ruin our 69, but not valentine!";
+        document.querySelector("p").innerText = "a period may ruin our 69, but not valentine!"; 
 
         gif.style.display = "block";
 
@@ -108,7 +115,7 @@
         }
       });
 
-      // NO button = impossible
+      // NO button: impossible to click
       noBtn.addEventListener("mouseenter", () => moveNo(noBtn));
       noBtn.addEventListener("click", (e) => e.preventDefault());
     });
@@ -121,7 +128,18 @@
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
-      heart.textContent = ["💖","💗","💘","💞","💕]()
+      heart.textContent = ["💖","💗","💘","💞","💕"][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 24 + 16 + "px";
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+  </script>
+
+</body>
+</html>
+
 
 
 
