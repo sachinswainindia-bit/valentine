@@ -8,9 +8,16 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
+  <!-- Stop iOS text shrinking -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>pls don’t panic 💘</title>
 
   <style>
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       background: linear-gradient(135deg, #ffd6e8, #ffeef5);
       font-family: "Comic Sans MS", cursive, sans-serif;
@@ -23,18 +30,22 @@
       align-items: center;
     }
 
+    /* Headline */
     h1 {
       margin-top: 18vh;
-      font-size: 34px;
+      font-size: clamp(32px, 8vw, 40px);
+      line-height: 1.2;
     }
 
+    /* Question */
     p {
-      font-size: 18px;
+      font-size: clamp(20px, 5vw, 24px);
+      line-height: 1.4;
       margin-bottom: 40px;
       padding: 0 16px;
     }
 
-    /* Button container */
+    /* Button group */
     .btn-group {
       display: flex;
       gap: 18px;
@@ -42,12 +53,12 @@
     }
 
     button {
-      font-size: 20px;
-      padding: 14px 26px;
+      font-size: clamp(18px, 4.5vw, 22px);
+      padding: 16px 26px;
       border: none;
       border-radius: 16px;
       cursor: pointer;
-      min-width: 110px;
+      min-width: 120px;
     }
 
     #yes {
@@ -58,13 +69,14 @@
     #no {
       background: #aaa;
       color: white;
-      position: relative; /* IMPORTANT: not absolute initially */
+      position: relative;
     }
 
+    /* GIF */
     #gif {
       display: none;
       width: 240px;
-      margin-top: 30px;
+      margin-top: 32px;
       animation: pop 0.6s ease forwards;
     }
 
@@ -90,6 +102,21 @@
       100% {
         transform: translateY(-100vh) scale(1.4);
         opacity: 0;
+      }
+    }
+
+    /* Extra mobile polish */
+    @media (max-width: 480px) {
+      h1 {
+        margin-top: 15vh;
+      }
+
+      .btn-group {
+        gap: 16px;
+      }
+
+      #gif {
+        width: 220px;
       }
     }
   </style>
@@ -130,7 +157,7 @@
         }
       });
 
-      // NO button: escape logic
+      // NO button: escape on hover / touch
       noBtn.addEventListener("mouseenter", () => escapeNo(noBtn));
       noBtn.addEventListener("touchstart", () => escapeNo(noBtn));
       noBtn.addEventListener("click", (e) => e.preventDefault());
@@ -138,7 +165,7 @@
 
     function escapeNo(btn) {
       if (!noHasEscaped) {
-        btn.style.position = "fixed"; // becomes absolute ONLY now
+        btn.style.position = "fixed";
         noHasEscaped = true;
       }
 
@@ -161,6 +188,7 @@
 
 </body>
 </html>
+
 
 
 
