@@ -8,7 +8,6 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <!-- Stop iOS text shrinking -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>pls don’t panic 💘</title>
@@ -30,14 +29,12 @@
       align-items: center;
     }
 
-    /* Headline */
     h1 {
       margin-top: 18vh;
       font-size: clamp(32px, 8vw, 40px);
       line-height: 1.2;
     }
 
-    /* Question */
     p {
       font-size: clamp(20px, 5vw, 24px);
       line-height: 1.4;
@@ -45,34 +42,38 @@
       padding: 0 16px;
     }
 
-    /* Button group */
+    /* Button wrapper */
     .btn-group {
-      display: flex;
-      gap: 18px;
       position: relative;
+      width: 260px; /* LOCK layout width */
+      height: 70px; /* LOCK layout height */
     }
 
     button {
+      position: absolute;
+      top: 0;
       font-size: clamp(18px, 4.5vw, 22px);
       padding: 16px 26px;
       border: none;
-      border-radius: 16px;
+      border-radius: 28px; /* MORE ROUNDED */
       cursor: pointer;
       min-width: 120px;
+      transition: transform 0.2s ease;
     }
 
     #yes {
+      left: 0;
       background: #ff4d88;
       color: white;
+      transform-origin: center;
     }
 
     #no {
+      right: 0;
       background: #aaa;
       color: white;
-      position: relative;
     }
 
-    /* GIF */
     #gif {
       display: none;
       width: 240px;
@@ -85,7 +86,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -105,14 +105,9 @@
       }
     }
 
-    /* Extra mobile polish */
     @media (max-width: 480px) {
       h1 {
         margin-top: 15vh;
-      }
-
-      .btn-group {
-        gap: 16px;
       }
 
       #gif {
@@ -136,15 +131,19 @@
 
   <script>
     let heartInterval = null;
-    let noHasEscaped = false;
+    let yesScale = 1;
+    let noEscaped = false;
 
     document.addEventListener("DOMContentLoaded", () => {
       const yesBtn = document.getElementById("yes");
       const noBtn = document.getElementById("no");
       const gif = document.getElementById("gif");
 
-      // YES button
       yesBtn.addEventListener("click", () => {
+        // grow YES by 10%, cap at 2x
+        yesScale = Math.min(yesScale * 1.1, 2);
+        yesBtn.style.transform = `scale(${yesScale})`;
+
         document.body.style.background = "#ffb3d9";
         document.querySelector("h1").innerText = "YAYYY 💘";
         document.querySelector("p").innerText =
@@ -157,16 +156,16 @@
         }
       });
 
-      // NO button: escape on hover / touch
+      // NO button escape
       noBtn.addEventListener("mouseenter", () => escapeNo(noBtn));
       noBtn.addEventListener("touchstart", () => escapeNo(noBtn));
       noBtn.addEventListener("click", (e) => e.preventDefault());
     });
 
     function escapeNo(btn) {
-      if (!noHasEscaped) {
-        btn.style.position = "fixed";
-        noHasEscaped = true;
+      if (!noEscaped) {
+        btn.style.position = "fixed"; // escape without layout shift
+        noEscaped = true;
       }
 
       btn.style.left = Math.random() * (window.innerWidth - 120) + "px";
@@ -188,6 +187,7 @@
 
 </body>
 </html>
+
 
 
 
