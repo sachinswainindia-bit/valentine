@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>pls don’t panic</title>
+  <title>pls don’t panic 💘</title>
 
   <style>
     body {
@@ -56,7 +56,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -83,49 +82,46 @@
   <h1>🚨 very important question 🚨</h1>
   <p>will you be my valentine? 💘</p>
 
-  <button id="yes" onclick="yesClick()">yes 😌</button>
-  <button id="no" onmouseover="moveNo()">no 🙃</button>
+  <button id="yes">yes 😌</button>
+  <button id="no">no 🙃</button>
 
   <img id="gif" src="yay.gif" alt="celebration gif">
 
   <script>
-    let heartInterval;
+    let heartInterval = null;
 
-    function yesClick() {
-      document.body.style.background = "#ffb3d9";
-      document.querySelector("h1").innerText = "YAYYY 💘";
-      document.querySelector("p").innerText = "okay this made my whole day";
+    document.addEventListener("DOMContentLoaded", () => {
+      const yesBtn = document.getElementById("yes");
+      const noBtn = document.getElementById("no");
+      const gif = document.getElementById("gif");
 
-      document.getElementById("gif").style.display = "block";
+      // YES button
+      yesBtn.addEventListener("click", () => {
+        document.body.style.background = "#ffb3d9";
+        document.querySelector("h1").innerText = "YAYYY 💘";
+        document.querySelector("p").innerText = "okay this made my whole day";
 
-      // start floating hearts (only once)
-      if (!heartInterval) {
-        heartInterval = setInterval(createHeart, 300);
-      }
-    }
+        gif.style.display = "block";
 
-    function moveNo() {
-      const btn = document.getElementById("no");
-      btn.style.left = Math.random() * 80 + "vw";
-      btn.style.top = Math.random() * 80 + "vh";
+        if (!heartInterval) {
+          heartInterval = setInterval(createHeart, 250);
+        }
+      });
+
+      // NO button = impossible
+      noBtn.addEventListener("mouseenter", () => moveNo(noBtn));
+      noBtn.addEventListener("click", (e) => e.preventDefault());
+    });
+
+    function moveNo(btn) {
+      btn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+      btn.style.top = Math.random() * (window.innerHeight - 60) + "px";
     }
 
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
-      heart.innerText = ["💖","💗","💘","💞","💕"][Math.floor(Math.random() * 5)];
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.textContent = ["💖","💗","💘","💞","💕]()
 
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 4000);
-    }
-  </script>
-
-</body>
-</html>
 
 
