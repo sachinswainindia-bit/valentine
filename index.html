@@ -28,7 +28,7 @@
       font-size: 22px;
       padding: 14px 28px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
     }
 
@@ -55,6 +55,26 @@
       0% { transform: scale(0); }
       100% { transform: scale(1); }
     }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 4s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -69,6 +89,8 @@
   <img id="gif" src="yay.gif" alt="celebration gif">
 
   <script>
+    let heartInterval;
+
     function yesClick() {
       document.body.style.background = "#ffb3d9";
       document.querySelector("h1").innerText = "YAYYY 💘";
@@ -76,7 +98,10 @@
 
       document.getElementById("gif").style.display = "block";
 
-      alert("🎉 congrats, you just made me very happy 💘");
+      // start floating hearts (only once)
+      if (!heartInterval) {
+        heartInterval = setInterval(createHeart, 300);
+      }
     }
 
     function moveNo() {
@@ -84,8 +109,23 @@
       btn.style.left = Math.random() * 80 + "vw";
       btn.style.top = Math.random() * 80 + "vh";
     }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = ["💖","💗","💘","💞","💕"][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
   </script>
 
 </body>
 </html>
+
 
