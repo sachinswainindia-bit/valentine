@@ -1,61 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Important Valentine Question 💘</title>
+  <meta charset="UTF-8">
+  <title>pls don’t panic</title>
+
   <style>
     body {
-      background: #ffe6f2;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
       font-family: "Comic Sans MS", cursive, sans-serif;
       text-align: center;
-      padding-top: 120px;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
     }
-    #question {
-      font-size: 36px;
-      margin: 20px;
+
+    h1 {
+      margin-top: 120px;
+      font-size: 38px;
     }
-    .btn {
-      font-size: 24px;
-      padding: 15px 30px;
-      margin: 15px;
+
+    p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 14px 28px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.2s;
     }
-    .btn:hover {
-      transform: scale(1.1);
+
+    #yes {
+      background: #ff4d88;
+      color: white;
+      margin-right: 20px;
     }
-    #yes { background: #ff6699; color: white; }
-    #no { background: #999; color: white; }
+
+    #no {
+      background: #aaa;
+      color: white;
+      position: absolute;
+    }
+
+    #gif {
+      display: none;
+      width: 300px;
+      margin: 30px auto;
+      animation: pop 0.6s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 
 <body>
-  <h1>🚨 IMPORTANT SYSTEM ALERT 🚨</h1>
-  <p id="question">IF (YOU === AWESOME) {<br>
-  &nbsp;&nbsp;ANSWER = ❤️"YES"<br>
-  } ELSE {<br>
-  &nbsp;&nbsp;ANSWER = "TRY AGAIN"<br>
-  }</p>
 
-  <button id="yes" class="btn" onclick="replyYes()">YES 😌</button>
-  <button id="no" class="btn" onclick="moveNo()">NO 🙃</button>
+  <h1>🚨 very important question 🚨</h1>
+  <p>will you be my valentine? 💘</p>
+
+  <button id="yes" onclick="yesClick()">yes 😌</button>
+  <button id="no" onmouseover="moveNo()">no 🙃</button>
+
+  <img id="gif" src="yay.gif" alt="celebration gif">
 
   <script>
-    let noBtn = document.getElementById("no");
-
-    function replyYes() {
-      alert("BEST DECISION EVER! 💖");
+    function yesClick() {
       document.body.style.background = "#ffb3d9";
-      document.getElementById("question").innerText = "💘 YOU MADE ME SMILE! 💘";
+      document.querySelector("h1").innerText = "YAYYY 💘";
+      document.querySelector("p").innerText = "okay this made my whole day";
+
+      document.getElementById("gif").style.display = "block";
+
+      alert("🎉 congrats, you just made me very happy 💘");
     }
 
     function moveNo() {
-      noBtn.style.position = "relative";
-      noBtn.style.left = Math.random()*200 - 100 + "px";
-      noBtn.style.top = Math.random()*100 - 50 + "px";
-      alert("Oops 😏 That button is shy. Try YES!");
+      const btn = document.getElementById("no");
+      btn.style.left = Math.random() * 80 + "vw";
+      btn.style.top = Math.random() * 80 + "vh";
     }
   </script>
+
 </body>
 </html>
+
